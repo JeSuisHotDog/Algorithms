@@ -65,16 +65,19 @@ def insertionsort_with_binary_search(lst: list) -> None:
             lst[j] = lst[j-1]
         lst[pos] = key
 
-def binary_search_insert(lst,key,low, high):
+def binary_search_insert(lst:list, key:object) -> int:
+    return _binary_search_insert(lst,key,0, len(lst)-1)
+
+def _binary_search_insert(lst:list,key:object,low:int, high:int) -> int:
     if low > high:
         return low
     mid = (low + high) // 2
     if lst[mid] < key:
-        return binary_search_insert(lst, key, mid + 1, high)
+        return _binary_search_insert(lst, key, mid + 1, high)
     else:
-        return binary_search_insert(lst, key, low, mid - 1)
+        return _binary_search_insert(lst, key, low, mid - 1)
 
 if __name__ == '__main__':
     lst = [1, 2, 3, 4, 5, 6, 7]
-    print(binary_search_recursive(lst, 6, 0, len(lst) - 1))
-    print(binary_search_recursive(lst, 9, 0, len(lst) - 1))
+    key = 6
+    print(binary_search_recursive(lst,key))
